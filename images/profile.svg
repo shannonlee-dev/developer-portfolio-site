@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 540" role="img" aria-labelledby="title desc">
+  <title id="title">웹 포트폴리오 프로필 일러스트</title>
+  <desc id="desc">노트북과 코드 카드가 놓인 작업 공간 일러스트</desc>
+  <rect width="720" height="540" fill="#f7f4ee"/>
+  <circle cx="552" cy="126" r="82" fill="#d94655" opacity="0.22"/>
+  <circle cx="166" cy="424" r="104" fill="#0f766e" opacity="0.18"/>
+  <rect x="118" y="94" width="484" height="318" rx="28" fill="#ffffff" stroke="#ded6ca" stroke-width="6"/>
+  <rect x="156" y="134" width="220" height="28" rx="14" fill="#0f766e"/>
+  <rect x="156" y="188" width="410" height="18" rx="9" fill="#ded6ca"/>
+  <rect x="156" y="226" width="332" height="18" rx="9" fill="#ded6ca"/>
+  <rect x="156" y="264" width="384" height="18" rx="9" fill="#ded6ca"/>
+  <rect x="156" y="326" width="118" height="46" rx="23" fill="#115e59"/>
+  <rect x="304" y="326" width="118" height="46" rx="23" fill="#d94655"/>
+  <path d="M266 450h188l24 42H242l24-42Z" fill="#24201d"/>
+  <rect x="210" y="412" width="300" height="38" rx="10" fill="#24201d"/>
+</svg>

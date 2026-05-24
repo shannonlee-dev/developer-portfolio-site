@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="순수 HTML, CSS, JavaScript로 만든 반응형 포트폴리오 웹사이트">
+  <title>Shannon Lee Portfolio</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/main.js" defer></script>
+</head>
+<body>
+  <header class="site-header" data-header>
+    <nav class="navbar" aria-label="주요 메뉴">
+      <a class="logo" href="#hero" aria-label="Shannon Lee 홈">Shannon Lee</a>
+      <button class="hamburger" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="nav-menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <ul class="nav-menu" id="nav-menu">
+        <li><a class="nav-link" href="#hero">Home</a></li>
+        <li><a class="nav-link" href="#about">About</a></li>
+        <li><a class="nav-link" href="#skills">Skills</a></li>
+        <li><a class="nav-link" href="#projects">Projects</a></li>
+        <li><a class="nav-link" href="#contact">Contact</a></li>
+      </ul>
+      <button class="theme-toggle" type="button" aria-label="다크 모드 전환" data-theme-toggle>
+        <span data-theme-label>Dark</span>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero section reveal" id="hero" aria-labelledby="hero-title">
+      <div class="hero-content">
+        <p class="eyebrow">Frontend Fundamentals Portfolio</p>
+        <h1 id="hero-title">안녕하세요, <span data-typing-text>Shannon Lee</span>입니다.</h1>
+        <p class="hero-copy">
+          사용자 이벤트가 상태를 바꾸고 화면이 다시 렌더링되는 흐름을 직접 구현하는 웹 개발자 지망생입니다.
+        </p>
+        <div class="hero-actions">
+          <a class="button primary" href="#projects">View Projects</a>
+          <a class="button secondary" href="#contact">Contact</a>
+        </div>
+      </div>
+      <div class="hero-panel" aria-label="상태 렌더링 요약">
+        <p class="panel-label">State Flow</p>
+        <ol>
+          <li>Event</li>
+          <li>State</li>
+          <li>Render</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section about reveal" id="about" aria-labelledby="about-title">
+      <div>
+        <p class="eyebrow">About</p>
+        <h2 id="about-title">문제를 작은 상태로 나누어 구현합니다.</h2>
+        <p>
+          HTML의 의미 구조, CSS 레이아웃, JavaScript 이벤트 처리를 연결해 사용자가 이해하기 쉬운 화면을 만듭니다.
+          이 포트폴리오는 프레임워크 없이 DOM API와 비동기 흐름을 학습하기 위해 작성했습니다.
+        </p>
+      </div>
+      <figure class="profile-card">
+        <img src="images/profile.svg" alt="노트북 앞에서 웹 인터페이스를 설계하는 Shannon Lee 프로필 일러스트">
+        <figcaption>HTML, CSS, JavaScript로 직접 만드는 인터랙션</figcaption>
+      </figure>
+    </section>
+
+    <section class="section skills reveal" id="skills" aria-labelledby="skills-title">
+      <p class="eyebrow">Skills</p>
+      <h2 id="skills-title">기술 스택</h2>
+      <div class="skill-grid">
+        <article class="skill-card">
+          <h3>HTML5</h3>
+          <ul>
+            <li>시맨틱 마크업</li>
+            <li>접근성 있는 폼</li>
+            <li>문서 구조 설계</li>
+          </ul>
+        </article>
+        <article class="skill-card">
+          <h3>CSS3</h3>
+          <ul>
+            <li>모바일 퍼스트</li>
+            <li>Flexbox와 Grid</li>
+            <li>테마 변수</li>
+          </ul>
+        </article>
+        <article class="skill-card">
+          <h3>JavaScript</h3>
+          <ul>
+            <li>DOM 이벤트</li>
+            <li>상태 기반 렌더링</li>
+            <li>fetch와 async/await</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section projects reveal" id="projects" aria-labelledby="projects-title">
+      <div class="section-header">
+        <div>
+          <p class="eyebrow">Projects</p>
+          <h2 id="projects-title">GitHub 저장소</h2>
+        </div>
+        <button class="button secondary small" type="button" data-retry-projects>다시 시도</button>
+      </div>
+      <div class="filter-bar" aria-label="언어별 프로젝트 필터" data-filter-bar></div>
+      <div class="project-status" role="status" aria-live="polite" data-project-status>로딩 중...</div>
+      <div class="projects-grid" data-projects-grid></div>
+    </section>
+
+    <section class="section contact reveal" id="contact" aria-labelledby="contact-title">
+      <div>
+        <p class="eyebrow">Contact</p>
+        <h2 id="contact-title">메시지 보내기</h2>
+        <p>폼은 필수값과 이메일 형식을 검사한 뒤 Formspree로 바로 전송합니다.</p>
+      </div>
+      <form class="contact-form" novalidate data-contact-form>
+        <div class="form-field">
+          <label for="name">이름</label>
+          <input id="name" name="name" type="text" autocomplete="name" required>
+          <p class="field-error" data-error-for="name"></p>
+        </div>
+        <div class="form-field">
+          <label for="email">이메일</label>
+          <input id="email" name="email" type="email" autocomplete="email" required>
+          <p class="field-error" data-error-for="email"></p>
+        </div>
+        <div class="form-field">
+          <label for="message">메시지</label>
+          <textarea id="message" name="message" rows="5" required></textarea>
+          <p class="field-error" data-error-for="message"></p>
+        </div>
+        <button class="button primary" type="submit">Send</button>
+        <p class="form-message" role="status" aria-live="polite" data-form-message></p>
+      </form>
+    </section>
+  </main>
+
+  <button class="scroll-top" type="button" aria-label="맨 위로 이동" data-scroll-top>Top</button>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Shannon Lee. Built with HTML, CSS, and JavaScript.</p>
+    <ul class="social-links">
+      <li><a href="https://github.com/shannonlee-dev" target="_blank" rel="noreferrer">GitHub</a></li>
+      <li><a href="https://github.com/shannonlee-dev/codyssey_mission/tree/main/2026-main-4-1" target="_blank" rel="noreferrer">Repository</a></li>
+      <li><a href="https://www.linkedin.com/" target="_blank" rel="noreferrer">LinkedIn</a></li>
+    </ul>
+  </footer>
+</body>
+</html>
