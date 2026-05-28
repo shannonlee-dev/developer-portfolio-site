@@ -258,6 +258,8 @@ async function handleContactSubmit(event) {
     return;
   }
 
+
+
   try {
     const response = await fetch(siteConfig.formspreeEndpoint, {
       method: 'POST',
