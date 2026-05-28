@@ -13,8 +13,8 @@
 
 ## 링크
 
-- GitHub 저장소 URL: https://github.com/shannonlee-dev/codyssey_mission/tree/main/2026-main-4-1
-- GitHub Pages 배포 URL: https://shannonlee-dev.github.io/codyssey_mission/2026-main-4-1/
+- GitHub 저장소 URL: https://github.com/shannonlee-dev/codyssey-mission/tree/main/2026-main-4-1
+- GitHub Pages 배포 URL: https://shannonlee-dev.github.io/codyssey-mission/2026-main-4-1/
 
 
 ## 구현 기준

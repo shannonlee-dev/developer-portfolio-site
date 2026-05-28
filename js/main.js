@@ -1,8 +1,8 @@
 const siteConfig = {
   githubUsername: 'shannonlee-dev',
   githubReposEndpoint: 'https://api.github.com/users/shannonlee-dev/repos',
-  repositoryUrl: 'https://github.com/shannonlee-dev/codyssey_mission/tree/main/2026-main-4-1',
-  pagesUrl: 'https://shannonlee-dev.github.io/codyssey_mission/2026-main-4-1/',
+  repositoryUrl: 'https://github.com/shannonlee-dev/codyssey-mission/tree/main/2026-main-4-1',
+  pagesUrl: 'https://shannonlee-dev.github.io/codyssey-mission/2026-main-4-1/',
   formspreeEndpoint: 'https://formspree.io/f/xvzyqdro',
   scrollTopThreshold: 300,
   navScrollThreshold: 60,
