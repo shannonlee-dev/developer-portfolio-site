@@ -17,18 +17,19 @@ export function getLanguages(projects) {
 export function renderFilters() {
   const languages = getLanguages(state.projects);
 
-  elements.filterBar.innerHTML = languages
-    .map((language) => {
-      const isActive = language === state.activeLanguage ? ' active' : '';
-      return `<button class="filter-button${isActive}" type="button" data-language="${language}">${language === 'All' ? '전체' : language}</button>`;
-    })
-    .join('');
-
-  elements.filterBar.querySelectorAll('[data-language]').forEach((button) => {
+  elements.filterBar.replaceChildren();
+  languages.forEach((language) => {
+    const button = document.createElement('button');
+    button.className = 'filter-button';
+    button.classList.toggle('active', language === state.activeLanguage);
+    button.type = 'button';
+    button.dataset.language = language;
+    button.textContent = language === 'All' ? '전체' : language;
     button.addEventListener('click', () => {
-      state.activeLanguage = button.dataset.language;
+      state.activeLanguage = language;
       renderProjects();
     });
+    elements.filterBar.append(button);
   });
 }
 
@@ -41,21 +42,41 @@ export function getVisibleProjects() {
 }
 
 export function renderProjectCards(projects) {
-  elements.projectsGrid.innerHTML = projects
-    .map(
-      ({ name, description, html_url: url, stargazers_count: stars, language }) => `
-      <article class="project-card">
-        <h3>${name}</h3>
-        <p>${description || '설명이 없는 저장소입니다.'}</p>
-        <div class="project-meta">
-          <span>언어: ${language || '미지정'}</span>
-          <span>별: ${stars}</span>
-        </div>
-        <a class="button secondary small" href="${url}" target="_blank" rel="noreferrer">저장소</a>
-      </article>
-    `,
-    )
-    .join('');
+  elements.projectsGrid.replaceChildren();
+  projects.forEach(
+    ({ name, description, html_url: url, stargazers_count: stars, language }) => {
+      const card = document.createElement('article');
+      card.className = 'project-card';
+      const title = document.createElement('h3');
+      title.textContent = name;
+      const summary = document.createElement('p');
+      summary.textContent = description || '설명이 없는 저장소입니다.';
+      const metadata = document.createElement('div');
+      metadata.className = 'project-meta';
+      const languageLabel = document.createElement('span');
+      languageLabel.textContent = `언어: ${language || '미지정'}`;
+      const starsLabel = document.createElement('span');
+      starsLabel.textContent = `별: ${stars}`;
+      metadata.append(languageLabel, starsLabel);
+      card.append(title, summary, metadata);
+
+      try {
+        const repositoryUrl = new URL(url);
+        if (['https:', 'http:'].includes(repositoryUrl.protocol)) {
+          const link = document.createElement('a');
+          link.className = 'button secondary small';
+          link.href = repositoryUrl.href;
+          link.target = '_blank';
+          link.rel = 'noreferrer';
+          link.textContent = '저장소';
+          card.append(link);
+        }
+      } catch {
+        // A malformed repository URL must not become a navigation target.
+      }
+      elements.projectsGrid.append(card);
+    },
+  );
 }
 
 export function renderProjects() {
