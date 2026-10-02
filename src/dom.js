@@ -1,0 +1,18 @@
+export const elements = {
+  root: document.documentElement,
+  header: document.querySelector('[data-header]'),
+  hamburger: document.querySelector('.hamburger'),
+  navMenu: document.querySelector('#nav-menu'),
+  navLinks: document.querySelectorAll('.nav-link'),
+  themeToggle: document.querySelector('[data-theme-toggle]'),
+  themeLabel: document.querySelector('[data-theme-label]'),
+  scrollTop: document.querySelector('[data-scroll-top]'),
+  projectsGrid: document.querySelector('[data-projects-grid]'),
+  projectStatus: document.querySelector('[data-project-status]'),
+  retryProjects: document.querySelector('[data-retry-projects]'),
+  filterBar: document.querySelector('[data-filter-bar]'),
+  contactForm: document.querySelector('[data-contact-form]'),
+  formMessage: document.querySelector('[data-form-message]'),
+  revealTargets: document.querySelectorAll('.reveal'),
+  typingText: document.querySelector('[data-typing-text]'),
+};

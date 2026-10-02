@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="순수 HTML, CSS, JavaScript로 만든 반응형 포트폴리오 웹사이트">
-  <title>Shannon Lee Portfolio</title>
-  <link rel="stylesheet" href="css/style.css">
-  <script src="js/main.js" defer></script>
+  <title>Shannon Lee 포트폴리오</title>
+  <link rel="stylesheet" href="src/styles/main.css">
+  <script type="module" src="src/main.js" defer></script>
 </head>
 <body>
   <header class="site-header" data-header>
@@ -18,14 +18,14 @@
         <span></span>
       </button>
       <ul class="nav-menu" id="nav-menu">
-        <li><a class="nav-link" href="#hero">Home</a></li>
-        <li><a class="nav-link" href="#about">About</a></li>
-        <li><a class="nav-link" href="#skills">Skills</a></li>
-        <li><a class="nav-link" href="#projects">Projects</a></li>
-        <li><a class="nav-link" href="#contact">Contact</a></li>
+        <li><a class="nav-link" href="#hero">홈</a></li>
+        <li><a class="nav-link" href="#about">소개</a></li>
+        <li><a class="nav-link" href="#skills">기술</a></li>
+        <li><a class="nav-link" href="#projects">프로젝트</a></li>
+        <li><a class="nav-link" href="#contact">연락</a></li>
       </ul>
       <button class="theme-toggle" type="button" aria-label="다크 모드 전환" data-theme-toggle>
-        <span data-theme-label>Dark</span>
+        <span data-theme-label>다크 모드</span>
       </button>
     </nav>
   </header>
@@ -33,29 +33,29 @@
   <main>
     <section class="hero section reveal" id="hero" aria-labelledby="hero-title">
       <div class="hero-content">
-        <p class="eyebrow">Frontend Fundamentals Portfolio</p>
+        <p class="eyebrow">프런트엔드 개발 포트폴리오</p>
         <h1 id="hero-title">안녕하세요, <span data-typing-text>Shannon Lee</span>입니다.</h1>
         <p class="hero-copy">
           사용자 이벤트가 상태를 바꾸고 화면이 다시 렌더링되는 흐름을 직접 구현하는 웹 개발자 지망생입니다.
         </p>
         <div class="hero-actions">
-          <a class="button primary" href="#projects">View Projects</a>
-          <a class="button secondary" href="#contact">Contact</a>
+          <a class="button primary" href="#projects">프로젝트 보기</a>
+          <a class="button secondary" href="#contact">연락</a>
         </div>
       </div>
       <div class="hero-panel" aria-label="상태 렌더링 요약">
-        <p class="panel-label">State Flow</p>
+        <p class="panel-label">상태 흐름</p>
         <ol>
-          <li>Event</li>
-          <li>State</li>
-          <li>Render</li>
+          <li>이벤트</li>
+          <li>상태</li>
+          <li>화면 갱신</li>
         </ol>
       </div>
     </section>
 
     <section class="section about reveal" id="about" aria-labelledby="about-title">
       <div>
-        <p class="eyebrow">About</p>
+        <p class="eyebrow">소개</p>
         <h2 id="about-title">문제를 작은 상태로 나누어 구현합니다.</h2>
         <p>
           HTML의 의미 구조, CSS 레이아웃, JavaScript 이벤트 처리를 연결해 사용자가 이해하기 쉬운 화면을 만듭니다.
@@ -69,7 +69,7 @@
     </section>
 
     <section class="section skills reveal" id="skills" aria-labelledby="skills-title">
-      <p class="eyebrow">Skills</p>
+      <p class="eyebrow">기술</p>
       <h2 id="skills-title">기술 스택</h2>
       <div class="skill-grid">
         <article class="skill-card">
@@ -102,7 +102,7 @@
     <section class="section projects reveal" id="projects" aria-labelledby="projects-title">
       <div class="section-header">
         <div>
-          <p class="eyebrow">Projects</p>
+          <p class="eyebrow">프로젝트</p>
           <div class="section-title-row">
             <h2 id="projects-title">GitHub 저장소</h2>
             <button class="button secondary small" type="button" data-retry-projects>다시 시도</button>
@@ -116,7 +116,7 @@
 
     <section class="section contact reveal" id="contact" aria-labelledby="contact-title">
       <div>
-        <p class="eyebrow">Contact</p>
+        <p class="eyebrow">연락</p>
         <h2 id="contact-title">메시지 보내기</h2>
         <p>폼은 필수값과 이메일 형식을 검사한 뒤 Formspree로 바로 전송합니다.</p>
       </div>
@@ -136,19 +136,19 @@
           <textarea id="message" name="message" rows="5" required></textarea>
           <p class="field-error" data-error-for="message"></p>
         </div>
-        <button class="button primary" type="submit">Send</button>
+        <button class="button primary" type="submit">보내기</button>
         <p class="form-message" role="status" aria-live="polite" data-form-message></p>
       </form>
     </section>
   </main>
 
-  <button class="scroll-top" type="button" aria-label="맨 위로 이동" data-scroll-top>Top</button>
+  <button class="scroll-top" type="button" aria-label="맨 위로 이동" data-scroll-top>맨 위로</button>
 
   <footer class="site-footer">
-    <p>&copy; 2026 Shannon Lee. Built with HTML, CSS, and JavaScript.</p>
+    <p>&copy; 2026 Shannon Lee. HTML, CSS, JavaScript로 제작했습니다.</p>
     <ul class="social-links">
       <li><a href="https://github.com/shannonlee-dev" target="_blank" rel="noreferrer">GitHub</a></li>
-      <li><a href="https://github.com/shannonlee-dev/codyssey-mission/tree/main/2026-main-4-1" target="_blank" rel="noreferrer">Repository</a></li>
+      <li><a href="https://github.com/shannonlee-dev/developer-portfolio-site" target="_blank" rel="noreferrer">저장소</a></li>
       <li><a href="https://www.linkedin.com/" target="_blank" rel="noreferrer">LinkedIn</a></li>
     </ul>
   </footer>

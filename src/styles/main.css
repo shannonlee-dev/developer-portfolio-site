@@ -7,7 +7,7 @@
   --color-primary-strong: #115e59;
   --color-accent: #d94655;
   --color-border: #ded6ca;
-  --font-base: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-base: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --space-1: 0.5rem;
   --space-2: 1rem;
   --space-3: 1.5rem;
@@ -17,7 +17,7 @@
   --header-height: 72px;
 }
 
-[data-theme="dark"] {
+[data-theme='dark'] {
   --color-page: #141819;
   --color-surface: #202628;
   --color-text: #f3efe8;
@@ -30,7 +30,7 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
+  :root:not([data-theme='light']) {
     --color-page: #141819;
     --color-surface: #202628;
     --color-text: #f3efe8;
@@ -82,7 +82,10 @@ textarea {
   background: color-mix(in srgb, var(--color-page) 88%, transparent);
   border-bottom: 1px solid transparent;
   backdrop-filter: blur(16px);
-  transition: background-color 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
 }
 
 .site-header.scrolled {
@@ -130,7 +133,9 @@ textarea {
   padding: 0.65rem 0.75rem;
   border-radius: 6px;
   color: var(--color-muted);
-  transition: color 160ms ease, background-color 160ms ease;
+  transition:
+    color 160ms ease,
+    background-color 160ms ease;
 }
 
 .nav-link:hover {
@@ -163,7 +168,9 @@ textarea {
   width: 19px;
   height: 2px;
   background: var(--color-text);
-  transition: transform 160ms ease, opacity 160ms ease;
+  transition:
+    transform 160ms ease,
+    opacity 160ms ease;
 }
 
 .hamburger.active span:nth-child(1) {
@@ -185,7 +192,9 @@ textarea {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: 8px;
-  transition: transform 160ms ease, border-color 160ms ease;
+  transition:
+    transform 160ms ease,
+    border-color 160ms ease;
 }
 
 .theme-toggle:hover,
@@ -269,7 +278,10 @@ textarea {
   padding: 0.75rem 1.1rem;
   border-radius: 8px;
   font-weight: 800;
-  transition: transform 160ms ease, background-color 160ms ease, box-shadow 160ms ease;
+  transition:
+    transform 160ms ease,
+    background-color 160ms ease,
+    box-shadow 160ms ease;
 }
 
 .button.primary {
@@ -294,7 +306,10 @@ textarea {
 .filter-button {
   border-radius: 999px;
   cursor: pointer;
-  transition: color 160ms ease, background-color 160ms ease, border-color 160ms ease;
+  transition:
+    color 160ms ease,
+    background-color 160ms ease,
+    border-color 160ms ease;
 }
 
 .filter-button.active {
@@ -353,7 +368,10 @@ textarea {
 .skill-card,
 .project-card {
   padding: var(--space-3);
-  transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease,
+    border-color 160ms ease;
 }
 
 .skill-card:hover,
@@ -409,10 +427,12 @@ textarea {
   width: 100%;
   border: 1px solid var(--color-border);
   border-radius: 8px;
-  padding: 0.8rem 0.9rem;  /* 입력창에 텍스트 넣을 때 이쁘게 만듬 */
+  padding: 0.8rem 0.9rem; /* 입력창에 텍스트 넣을 때 이쁘게 만듬 */
   color: var(--color-text);
   background: var(--color-page);
-  transition: border-color 160ms ease, box-shadow 160ms ease;
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease;
 }
 
 .form-field input:focus,
@@ -448,7 +468,9 @@ textarea {
   background: var(--color-primary-strong);
   border-radius: 50%;
   box-shadow: var(--shadow-card);
-  transition: opacity 160ms ease, transform 160ms ease;
+  transition:
+    opacity 160ms ease,
+    transform 160ms ease;
 }
 
 .scroll-top.active {
@@ -483,7 +505,9 @@ textarea {
 .reveal {
   opacity: 0;
   transform: translateY(18px);
-  transition: opacity 500ms ease, transform 500ms ease;
+  transition:
+    opacity 500ms ease,
+    transform 500ms ease;
 }
 
 .reveal.visible {
