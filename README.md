@@ -25,7 +25,7 @@ HTML, CSS, JavaScript로 만든 반응형 포트폴리오입니다. 브라우저
 | `src/config.js`, `state.js`, `dom.js` | 설정·화면 상태·DOM 참조 |
 | `tests/` | Node 테스트 러너로 DOM·요청·로컬 자산 검증 |
 | `images/` | 화면에서 사용하는 이미지 |
-| `screenshots/` | 데스크톱·모바일·다크 모드 화면 증빙 |
+| `screenshots/` | 최초 제출 버전의 화면 예시와 촬영 이력 |
 | `scripts/check.py` | 문법·문서 링크 검사 |
 
 ```mermaid
@@ -46,7 +46,6 @@ flowchart LR
 실행에는 Python 3.10 이상만 필요합니다. JavaScript 문법 검사에는 Node.js 22를 사용합니다. 브라우저 실행에는 빌드가 필요하지 않습니다. Node.js 검사·테스트·형식 검사는 개발 도구를 설치한 뒤 실행합니다. 모든 명령은 저장소 루트에서 실행합니다.
 
 ```bash
-npm ci
 make run
 ```
 
@@ -59,6 +58,7 @@ make run
 ## 검증
 
 ```bash
+npm ci
 make check
 make test
 make smoke
@@ -66,10 +66,12 @@ make smoke
 
 문서 링크와 JavaScript 문법을 검사하고, HTML이 참조하는 로컬 CSS·JavaScript·이미지 및 내부 앵커를 확인합니다. 외부 API 호출과 문의 전송은 자동 검사에 포함하지 않습니다. 브라우저에서 메뉴, 테마 복원, 언어 필터, 폼 오류 표시를 추가 확인합니다.
 
-`make check`는 정적 분석·포맷·문서 검사를, `make test`는 `npm test`로 Node 내장 테스트 러너를 실행합니다. 테스트는 `tests/*.test.js`에 두며 실제 외부 요청을 모의합니다.
+`make check`는 정적 분석·포맷·문서 검사를, `make test`는 `npm test`로 Node 내장 테스트 러너를 실행합니다. 테스트는 `tests/*.test.js`에 두며 실제 외부 요청을 모의합니다. jsdom이 실제 `index.html`을 읽어 메뉴·테마·필터 클릭, 카드의 텍스트 렌더링, 전송 중 잠금과 실패 후 재시도를 검증합니다. 브라우저 레이아웃·외부 서비스 상태는 자동 테스트로 보장하지 않습니다.
 `make smoke`는 같은 러너로 로컬 자산·내부 이동 검사만 선택합니다(`npm run test:smoke`).
 
 ## 화면 예시
+
+아래 이미지는 최초 제출 커밋 `f248fc2`에 추가된 과거 화면입니다. 영문 메뉴·테마 라벨을 사용하는 당시 버전으로, 현재 한국어 UI의 스크린샷은 아닙니다. [촬영 이력과 현재 화면 확인 절차](screenshots/README.md)를 참고합니다.
 
 - [데스크톱 화면](screenshots/desktop.png)
 - [모바일 화면](screenshots/mobile.png)
