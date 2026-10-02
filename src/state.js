@@ -14,5 +14,6 @@ export const state = {
     },
     errors: {},
     submitted: false,
+    submitting: false,
   },
 };

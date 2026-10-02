@@ -34,6 +34,7 @@ export function updateFormState(event) {
 
 export async function handleContactSubmit(event) {
   event.preventDefault();
+  if (state.form.submitting) return;
 
   const formData = new FormData(elements.contactForm);
   state.form.values = Object.fromEntries(formData.entries());
@@ -52,6 +53,12 @@ export async function handleContactSubmit(event) {
     return;
   }
 
+  const submitButton = elements.contactForm.querySelector('[type="submit"]');
+  state.form.submitting = true;
+  state.form.submitted = false;
+  submitButton.disabled = true;
+  elements.formMessage.textContent = '전송 중입니다.';
+
   try {
     const response = await fetch(siteConfig.formspreeEndpoint, {
       method: 'POST',
@@ -62,13 +69,16 @@ export async function handleContactSubmit(event) {
     if (!response.ok) {
       throw new Error('Formspree request failed');
     }
+
+    state.form.submitted = true;
+    elements.formMessage.textContent = '전송되었습니다';
+    elements.contactForm.reset();
+    state.form.values = { name: '', email: '', message: '' };
   } catch (error) {
     elements.formMessage.textContent =
       '전송에 실패했습니다. 잠시 후 다시 시도해 주세요.';
-    return;
+  } finally {
+    state.form.submitting = false;
+    submitButton.disabled = false;
   }
-
-  state.form.submitted = true;
-  elements.formMessage.textContent = '전송되었습니다';
-  elements.contactForm.reset();
 }
