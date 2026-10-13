@@ -5,11 +5,11 @@ import { installBrowser } from './helpers/browser.js';
 const browser = installBrowser();
 const { elements } = await import('../src/dom.js');
 const { state } = await import('../src/state.js');
-const { handleContactSubmit, updateFormState } = await import(
-  '../src/features/contact.js'
-);
+const { handleContactSubmit, updateFormState } =
+  await import('../src/features/contact.js');
 const event = { preventDefault() {} };
 const button = elements.contactForm.querySelector('[type="submit"]');
+const { siteConfig } = await import('../src/config.js');
 function fill(values = { name: '사용자', email: 'user@example.com', message: '문의' }) {
   for (const [name, value] of Object.entries(values)) {
     const field = elements.contactForm.elements.namedItem(name);
@@ -27,12 +27,21 @@ test('validation errors prevent requests and clear when the field is corrected',
   };
   await handleContactSubmit(event);
   assert.equal(requests, 0);
+  assert.equal(document.activeElement.id, 'name');
+  assert.equal(
+    elements.contactForm.elements.namedItem('email').getAttribute('aria-invalid'),
+    'true',
+  );
   assert.match(
     document.querySelector('[data-error-for="email"]').textContent,
     /이메일/,
   );
   fill();
   assert.equal(document.querySelector('[data-error-for="email"]').textContent, '');
+  assert.equal(
+    elements.contactForm.elements.namedItem('email').getAttribute('aria-invalid'),
+    'false',
+  );
 });
 
 test('a pending send locks the submit button and ignores a second submission', async () => {
@@ -47,6 +56,7 @@ test('a pending send locks the submit button and ignores a second submission', a
   const second = handleContactSubmit(event);
   const requestCount = requests;
   const disabledDuringRequest = button.disabled;
+  assert.equal(elements.contactForm.elements.namedItem('message').readOnly, true);
   pending.forEach((resolve) => resolve({ ok: true }));
   await Promise.all([first, second]);
   assert.equal(requestCount, 1);
@@ -54,6 +64,39 @@ test('a pending send locks the submit button and ignores a second submission', a
   assert.equal(button.disabled, false);
   assert.equal(elements.contactForm.elements.namedItem('name').value, '');
   assert.equal(state.form.submitted, true);
+  assert.equal(elements.contactForm.elements.namedItem('message').readOnly, false);
+});
+
+test('email whitespace is normalized before validation and sending', async () => {
+  fill({ name: '  사용자  ', email: ' user@example.com ', message: '  문의  ' });
+  globalThis.fetch = async (_url, { body }) => {
+    assert.equal(body.get('email'), 'user@example.com');
+    assert.equal(body.get('name'), '사용자');
+    return { ok: true };
+  };
+  await handleContactSubmit(event);
+  assert.equal(state.form.submitted, true);
+});
+
+test('timeout retains values and explains the unknown delivery outcome', async () => {
+  fill();
+  const originalTimeout = siteConfig.requestTimeout;
+  siteConfig.requestTimeout = 5;
+  globalThis.fetch = (_url, { signal }) =>
+    new Promise((_resolve, reject) => {
+      signal.addEventListener('abort', () => reject(new Error('aborted')), {
+        once: true,
+      });
+    });
+  try {
+    await handleContactSubmit(event);
+    assert.match(elements.formMessage.textContent, /결과를 확인하지 못/);
+    assert.equal(elements.contactForm.elements.namedItem('message').value, '문의');
+    assert.equal(button.disabled, false);
+    assert.equal(elements.contactForm.getAttribute('aria-busy'), 'false');
+  } finally {
+    siteConfig.requestTimeout = originalTimeout;
+  }
 });
 
 test('HTTP failure retains input, releases the lock and allows a successful retry', async () => {

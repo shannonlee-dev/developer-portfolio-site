@@ -1,35 +1,27 @@
 import { siteConfig } from '../config.js';
 import { elements } from '../dom.js';
-import { state } from '../state.js';
 
 export function observeSections() {
+  if (
+    typeof IntersectionObserver === 'undefined' ||
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  )
+    return;
+
   const observer = new IntersectionObserver(
     (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
+      entries.forEach(({ isIntersecting, target }) => {
+        if (!isIntersecting) return;
+        target.classList.remove('pending');
+        target.classList.add('visible');
+        observer.unobserve(target);
       });
     },
     { threshold: siteConfig.observerThreshold },
   );
 
-  elements.revealTargets.forEach((target) => observer.observe(target));
-}
-
-export function runTypingEffect() {
-  const text = 'Shannon Lee';
-  let index = 0;
-
-  elements.typingText.textContent = '';
-
-  const typing = window.setInterval(() => {
-    elements.typingText.textContent = text.slice(0, index + 1);
-    index += 1;
-
-    if (index >= text.length) {
-      window.clearInterval(typing);
-    }
-  }, 110);
+  elements.revealTargets.forEach((target) => {
+    target.classList.add('pending');
+    observer.observe(target);
+  });
 }

@@ -14,5 +14,4 @@ export const elements = {
   contactForm: document.querySelector('[data-contact-form]'),
   formMessage: document.querySelector('[data-form-message]'),
   revealTargets: document.querySelectorAll('.reveal'),
-  typingText: document.querySelector('[data-typing-text]'),
 };

@@ -36,3 +36,23 @@ test('내부 이동 링크가 실제 HTML 요소를 가리킨다', () => {
   for (const target of anchors)
     assert.ok(ids.has(decodeURIComponent(target.slice(1))), target);
 });
+
+test('CSS와 JavaScript의 상대 경로 의존성도 실제 파일로 연결된다', () => {
+  const checked = new Set();
+  function visit(path) {
+    if (checked.has(path)) return;
+    checked.add(path);
+    assert.ok(existsSync(path) && statSync(path).isFile(), path);
+    const content = readFileSync(path, 'utf8');
+    const imports = /(?:from\s*|import\s*|@import\s*(?:url\(\s*)?)["'](\.[^"']+)["']/g;
+    for (const [, target] of content.matchAll(imports)) {
+      visit(fileURLToPath(new URL(target, `file://${path}`)));
+    }
+  }
+  targets
+    .filter((target) => /\.(?:css|js)$/.test(target))
+    .forEach((target) => {
+      visit(resolve(root, target));
+    });
+  assert.ok(checked.size > 2, 'entry points must resolve their source modules');
+});

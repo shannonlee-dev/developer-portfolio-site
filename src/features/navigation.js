@@ -2,39 +2,65 @@ import { siteConfig } from '../config.js';
 import { elements } from '../dom.js';
 import { state } from '../state.js';
 
+const scrollBehavior = () =>
+  window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth';
+
+export function renderMobileMenu() {
+  elements.navMenu.classList.toggle('active', state.menuOpen);
+  elements.hamburger.classList.toggle('active', state.menuOpen);
+  elements.hamburger.setAttribute('aria-expanded', String(state.menuOpen));
+  elements.hamburger.setAttribute(
+    'aria-label',
+    state.menuOpen ? '메뉴 닫기' : '메뉴 열기',
+  );
+}
+
 export function toggleMobileMenu() {
-  elements.navMenu.classList.toggle('active');
-  elements.hamburger.classList.toggle('active');
-  const isExpanded = elements.hamburger.classList.contains('active');
-  elements.hamburger.setAttribute('aria-expanded', String(isExpanded));
+  state.menuOpen = !state.menuOpen;
+  renderMobileMenu();
+  if (state.menuOpen) elements.navLinks[0]?.focus();
 }
 
 export function closeMobileMenu() {
-  elements.navMenu.classList.remove('active');
-  elements.hamburger.classList.remove('active');
-  elements.hamburger.setAttribute('aria-expanded', 'false');
+  state.menuOpen = false;
+  renderMobileMenu();
+}
+
+export function dismissMobileMenu(event) {
+  if (!state.menuOpen) return;
+  if (event.type === 'keydown') {
+    if (event.key !== 'Escape') return;
+    closeMobileMenu();
+    elements.hamburger.focus();
+  } else if (!elements.header.contains(event.target)) {
+    closeMobileMenu();
+  }
 }
 
 export function handleNavClick(event) {
+  if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+  const id = event.currentTarget.getAttribute('href').slice(1);
+  const target = document.getElementById(id);
+  if (!target) return;
   event.preventDefault();
-  const targetId = event.currentTarget.getAttribute('href');
-  const target = document.querySelector(targetId);
-
-  if (target) {
-    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
-
   closeMobileMenu();
+  target.setAttribute('tabindex', '-1');
+  target.focus({ preventScroll: true });
+  target.scrollIntoView({ behavior: scrollBehavior(), block: 'start' });
+  window.history.replaceState(null, '', `#${id}`);
 }
 
 export function handleScroll() {
-  const isPastTopThreshold = window.scrollY >= siteConfig.scrollTopThreshold;
-  const isPastNavThreshold = window.scrollY >= siteConfig.navScrollThreshold;
-
-  elements.scrollTop.classList.toggle('active', isPastTopThreshold);
-  elements.header.classList.toggle('scrolled', isPastNavThreshold);
+  const showTop = window.scrollY >= siteConfig.scrollTopThreshold;
+  elements.scrollTop.hidden = !showTop;
+  elements.scrollTop.classList.toggle('active', showTop);
+  elements.header.classList.toggle(
+    'scrolled',
+    window.scrollY >= siteConfig.navScrollThreshold,
+  );
 }
 
 export function scrollToTop() {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  document.querySelector('.logo').focus({ preventScroll: true });
+  window.scrollTo({ top: 0, behavior: scrollBehavior() });
 }

@@ -6,7 +6,7 @@ setup:
 
 check:
 	$(PYTHON) scripts/check.py
-	@for file in $$(find src -name "*.js"); do node --check "$$file" || exit $$?; done
+	@for file in $$(find src js -name "*.js"); do node --check "$$file" || exit $$?; done
 	npm run format:check
 
 format:
