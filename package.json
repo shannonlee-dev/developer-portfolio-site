@@ -11,7 +11,7 @@
     "test:smoke": "node --test tests/assets.test.js"
   },
   "devDependencies": {
-    "jsdom": "26.1.0",
+    "jsdom": "30.1.3",
     "prettier": "3.9.9"
   }
 }
